@@ -1,0 +1,106 @@
+html{
+    height: 100%;
+    margin: 0; 
+    overflow: auto;
+}
+body{
+    background-image: url("../images/cool-background\ \(2\).png");
+    overflow: auto;
+    height: 100%;
+    margin: 0;
+}
+#nav-a{
+    width :85%;
+    height: 80px;
+    background-color: #F8F9FA;
+    box-shadow:20px 20px 10px grey;  
+    /* text-align: center; */
+    margin-top: 10%;
+    margin-left: 8% ;
+    border-radius: 10px;
+    text-align: center;
+}
+.navbar{
+    padding-top:20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+}
+.right{
+    text-align: right;
+}
+#main-body{
+    width: 100%;
+    background-color: white;
+    box-shadow:20px 20px 10px grey; 
+    border-radius: 10px;
+    margin-top: 50px;
+    overflow: auto;
+    margin-bottom: 10%;
+    text-align: center;
+    /* height: 90%; */
+}
+.content-main-body{
+    padding :20px 2px 20px 2px;
+}
+.left{
+    margin-right: 30px;
+}
+.text-head{
+    padding-top: 10px;
+}
+.text-cases{
+    padding-top: 10px;
+    list-style: none;
+}
+.case{
+    padding-top:20px;
+}
+.img-death{
+    height:215px;
+}
+.img-rec{
+    height: 215px;
+}.mb{
+    width: 100%;
+    background-color: white;
+    box-shadow:20px 20px 10px grey; 
+    border-radius: 10px;
+    overflow: auto;
+    margin-bottom: 10%;
+    text-align: center;
+   
+}
+.caro{
+    width: 50%;
+    height: 30%;
+    /* width:90%;
+    height: 70%; */
+background-image: url("../images/cbd.png");
+    padding: 2%;
+    margin-right:auto;
+    margin-left: auto;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+#aboutsection{
+    width: 100%;
+    background-color: white;
+    box-shadow:20px 20px 10px grey; 
+    border-radius: 10px;
+    margin-top: 50px;
+    overflow: auto;
+    margin-bottom: 10%;
+    text-align: center;
+}
+@media (max-width: 991px) { 
+    .left{
+        margin-right: 0;
+    }
+ }
+ @media (max-width: 1024px){
+    .caro{
+        width:70%
+    }
+ }
