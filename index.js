@@ -4,7 +4,10 @@ const ejs = require("ejs");
 const request = require("request")
 
 const app = express();
-
+var pageN =9
+var cont="GetMoreNews" 
+var a="POST"
+var b="/news"
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -25,40 +28,71 @@ function size(obj){
         return size;
     
 }
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function n(na){
+    return numberWithCommas(Number(na))
+}
 app.post("/checker",(req,res)=>{
     symp = req.body.symp;
     dis = req.body.dis;
     info = req.body.info;
-    console.log(symp);
-    console.log(dis);
-    console.log(info);
-    console.log(Array.isArray(symp));
-    if(Array.isArray(symp) && Array.isArray(dis) && Array.isArray(info)){
-        res.render("home",{textj:"you risk level is high"})
+    // console.log(symp);
+    // console.log(dis);
+    // console.log(info);
+    // console.log(Array.isArray(symp));
+    // if(Array.isArray(symp) || Array.isArray(dis) || Array.isArray(info)){
+    //     if(symp.indexOf("none1") !== -1 || dis.indexOf("none2") !== -1 || info.indexOf("none3") !== -1 ){
+    //         res.render("home",{textj:"please dont choose nonee with other option.You can retake your checkup"})
+    //     }
+    //  } else 
+     if(Array.isArray(symp) && Array.isArray(dis) && Array.isArray(info)){
+        if(symp.indexOf("none1") === "-1" || dis.indexOf("none2") === "-1" || info.indexOf("none3") === "-1" ){
+            res.render("home",{textj:"please dont choose nonee with other option.You can retake your checkup by <a class ='btn btn-dark'>Click Here</a>"})
+        }else{
+            res.render("home",{textj:"you risk level is high"})
+
+        }
     } else if (Array.isArray(symp) && Array.isArray(dis) && Array.isArray(info)===false){
-        if (symp === "none3"){
+        if(symp.indexOf("none1") === "-1" || dis.indexOf("none2") === "none1" || info.indexOf("none3") === "none1" ){
+            res.render("home",{textj:"please dont choose nonee with other option.You can retake your checkup by <a class ='btn btn-dark'>Click Here</a>"})
+        }
+        else if (symp === "none3"){
             res.render("home",{textj:"you risk level is medium"})
         } else {
             res.render("home",{textj:"you risk level is high"})
         }
         
     }else if(Array.isArray(symp) && Array.isArray(dis)===false && Array.isArray(info)===false){
-        if (dis === "none2" && info === "none3"){
+        console.log("hi");
+        
+         if (dis === "none2" && info === "none3"){
             res.render("home",{textj:"your risk level is low"});
         } else {
-            res.render("home",{textj:"your rissk level is high"})
+            res.render("home",{textj:"your risk level is high"})
         }
         
     } else if(Array.isArray(symp)===false && Array.isArray(dis) && Array.isArray(info)===false){
-        if(symp === "none1"&& info === "none3"){
+        if(symp.indexOf("none1") === "none1" || dis.indexOf("none2") === "none1" || info.indexOf("none3") === "none1" ){
+            res.render("home",{textj:"please dont choose nonee with other option.You can retake your checkup"})
+        } else if(symp === "none1"&& info === "none3"){
             res.render("home",{textj:"your risk level is medium"})
         } else{
             res.render("home",{textj:"your risk level is medium"})
         }
     } else if(Array.isArray(symp)===false && Array.isArray(dis) && Array.isArray(info)){
+        if(symp.indexOf("none1") === "none1" || dis.indexOf("none2") === "none1" || info.indexOf("none3") === "none1" ){
+            res.render("home",{textj:"please dont choose nonee with other option.You can retake your checkup"})
+        } else {
         res.render("home",{textj:"your risk level is medium"})
+        }
     } else if (Array.isArray(symp) && Array.isArray(dis)===false && Array.isArray(info)){
-        log("dis false")
+        if(symp.indexOf("none1") === "none1" || dis.indexOf("none2") === "none1" || info.indexOf("none3") === "none1" ){
+            res.render("home",{textj:"please dont choose nonee with other option.You can retake your checkup"})
+        } else {
+            res.render("home",{textj:"your risk level is medium"})
+        }
     } else if(symp === "none1" && dis === "none2" && info ==="none3"){
         res.render("home",{textj:"your risk level is super low"})
     }else{
@@ -83,7 +117,7 @@ app.get("/cases",(req,res)=>{
             var acdn = size(aData);
             var acd = aData[acdn-1];
             
-    res.render("cases",{gd:data.TotalDeaths,ga:data.TotalConfirmed,gr:data.TotalRecovered,id:icd.Deaths,ia:icd.Confirmed,ir:icd.Recovered,ad:acd.Deaths,aa:acd.Confirmed,ar:acd.Recovered});
+    res.render("cases",{gd:n(data.TotalDeaths),ga:n(data.TotalConfirmed),gr:n(data.TotalRecovered),id:n(icd.Deaths),ia:n(icd.Confirmed),ir:n(icd.Recovered),ad:n(acd.Deaths),aa:n(acd.Confirmed),ar:n(acd.Recovered)});
             })
         })
     });
@@ -118,7 +152,7 @@ app.post("/cases",(req,res)=>{
                         <img src="https://img.etimg.com/thumb/width-640,height-480,imgsize-186873,resizemode-1,msid-74932435/noida-7-more-test-positive-for-covid-19-in-last-24-hours-active-cases-39.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">CONFIRMED:</h5>
-                          <p class="card-text">${acd.Confirmed} </p>
+                          <p class="card-text">${n(acd.Confirmed)} </p>
                         </div>
                       </div>
                 </div>
@@ -127,7 +161,7 @@ app.post("/cases",(req,res)=>{
                         <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/story/202003/Suicide_1_0.jpeg?7ca8_EQg8pUbZchwhekwUx3xwsvFcCqQ" class="card-img-top img-death" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">DEATHS:</h5>
-                          <p class="card-text">${acd.Deaths} </p>
+                          <p class="card-text">${n(acd.Deaths)} </p>
                         </div>
                       </div>
                 </div>
@@ -136,7 +170,7 @@ app.post("/cases",(req,res)=>{
                         <img src="https://i.dailymail.co.uk/1s/2020/03/02/23/25451918-8066545-More_people_in_China_have_recovered_from_coronavirus_than_are_cu-a-11_1583190863935.jpg" class="card-img-top img-rec" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">RECOVERED:</h5>
-                          <p class="card-text">${acd.Recovered} </p>
+                          <p class="card-text">${n(acd.Recovered)} </p>
                         </div>
                       </div>
                 </div>
@@ -146,9 +180,24 @@ app.post("/cases",(req,res)=>{
             </body>
             </html>`)
         } else {
-            res.send("sorry")
+            res.send("sorry");
         }
         })
+})
+app.get("/news/:n",(req,res)=>{
+    const n = Number(req.params.n);
+    request("https://newsapi.org/v2/top-headlines?q=corona%20virus&country=in&category=health&pageSize="+n+"&apiKey=69c0850d9aa44307b93aa8928a42fb11",function(error,response,body){
+        var news = [JSON.parse(body).articles]
+        // console.log(news[0]["articles"]);
+        request("https://newsapi.org/v2/everything?q=covid-19&pageSize="+n+"&apiKey=69c0850d9aa44307b93aa8928a42fb11",function(er,rsponse,bo){
+            var nw = [JSON.parse(bo).articles]
+            
+        res.render("news",{posts:news,pw:nw,c:cont,p:b,d:a})
+        })
+    })
+})
+app.post("/news",(req,res)=>{
+ res.redirect("/news/20")
 })
 let port = process.env.PORT;
 if (port === null || port === "") {
