@@ -1,0 +1,82 @@
+<%- include('partials/header'); -%>
+<div id="nav-a">
+    
+    <nav class = " navbar navbar-expand-lg navbar-light bg-light">
+        <h5><a class="navbar-brand" href="/">COVID-19 Helper</a></h5>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ml-auto" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+            <h5><a class="nav-item nav-link" href="/">Home</a></h5>
+            <h5><a class="nav-item nav-link active" href="/checker">Checker</a></h5>
+            <h5><a class="nav-item nav-link" href="/cases">Cases</a></h5>
+            <h5><a class="nav-item nav-link left" href="/news/9">News</a></h5>
+            </div>
+        </div>
+    </nav>
+<div id = "main-body">
+    <div class ="content-main-body">
+        <form action="/checker" method="post">
+            <p id="hadf"></p>
+            <h1>Are You Having any of the following symtomps:</h1>
+            <select class="form-control form-control-lg" multiple name = "symp">
+                <option value="cough" id="dis2" aria-checked="true">Cough</option>
+                <option value="fever" id ="dis1">fever</option>
+                <option value="dfb" class="" id = "dis">Difficulty in breathing</option>
+                <option value="none1" class="hd">none of the above</option>
+              </select>
+              <h1>Are you having any of the following disease</h1>
+              <select class="form-control form-control-lg" multiple name = "dis">
+                <option value="ht">Hypertenstion</option>
+                <option value="dt">Diabetes</option>
+                <option value="ld">Lung Diseas</option>
+                <option value="none2">none of the above</option>
+              </select>
+              <h1>Which of the following apply to you</h1>
+              <select class="form-control form-control-lg" multiple name = "info">
+                <option value="covimet" id="block-you">You had met a person inffected with covid-19</option>
+                <option value="none3" >none of the above</option>
+              </select>
+              <button class="btn btn-lg btn-primary" type="submit">Submit</button>
+        </form>
+        
+    </div>
+    
+</div>
+<%- include('partials/about') %> 
+</div>
+<script type="text/javascript">
+var Dates = new Date()
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+var week = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+    var m = monthNames[Dates.getUTCMonth()]
+    var w = week[Dates.getUTCDay()]
+    var d = Dates.getUTCDate();
+    var y = Dates.getFullYear()
+
+    var cookie=document.cookie = "9"
+    console.log(w);
+    $("#a").attr("href","/news/"+cookie)
+
+    var trck=true
+    var boolcheck = false;
+        if(boolcheck){
+            var hd = document.getElementsByClassName("hd")
+            var dis = document.getElementById("dis")
+            var dis1 = document.getElementById("dis1")
+            var dis = document.getElementById("dis2")
+            
+        }
+    var width = $(window).width()
+var hadf =  document.getElementById("hadf")
+console.log(width);
+
+        if(width<700){
+            hadf.innerText="*Click On Rectangle Box  to select answers*"
+        }
+    var hd = document.getElementsByClassName("hd");
+</script>
+<%- include('partials/footer'); -%>

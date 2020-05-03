@@ -1,0 +1,93 @@
+<%- include('partials/header'); -%>
+<div id="nav-a">
+    <nav class = " navbar navbar-expand-lg navbar-light bg-light">
+        <h5><a class="navbar-brand" href="/">COVID-19 Helper</a></h5>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ml-auto" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+            <h5><a class="nav-item nav-link" href="/">Home</a></h5>
+            <h5><a class="nav-item nav-link" href="/checker">Checker</a></h5>
+            <h5><a class="nav-item nav-link" href="/cases">Cases</a></h5>
+            <h5><a class="nav-item nav-link left active" href="/news/9">News</a></h5>
+            </div>
+        </div>
+    
+    </nav>
+
+    <div id = "main-body">
+        <div class ="content-main-body">
+            <h1>Here in this section you can get latest news about covid-19.</h1>
+            <a class="btn btn-dark btn-lg" href="/news/#india">Indian News</a>
+                <a class="btn btn-dark btn-lg" href="/news/#world">World News</a>
+                <center>
+                    <h1>News from Indian Websites</h1>
+            <div id="india">
+                <div class="row">
+                <% posts.forEach(post => { %>
+                    <% post.forEach(po => { %>
+                            <div class="col-lg-4 col-md-6 col-sm-12" style="padding-top: 20px;">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="<%=po.urlToImage%>" alt="" class="card-img-top ij">
+                                    <div class="card-body">
+                                      <h5 class="card-title"><%= po.title %> </h5>
+                                      <p class="card-text"><%=po.description%></p>
+                                      <p>from <%= po.source.name %> </p>
+                                      <a href="<%= po.url %> " class="btn btn-primary">Read More</a>
+                                    </div>
+                                  </div>
+                            </div>
+                    <% }) %>
+                <% }) %>
+                    </div>
+                    <a href=""class="ad" onclick="num*2" id = "d">GET MORE NEWS</a>
+                </div>
+            </div>
+        </center>
+            <center>
+            <div id="world">
+                <h1>World News</h1>
+                <div class="row">
+                    <% pw.forEach(p => { %>
+                        <% p.forEach(po => { %>
+                        <div class="col-lg-4 col-md-6 col-sm-12" style="padding-top: 20px;">
+                            <div class="card" style="width: 18rem;">
+                                <img src="<%=po.urlToImage%>" alt="" class="card-img-top ij">
+                                <div class="card-body">
+                                  <h5 class="card-title"><%= po.title %> </h5>
+                                  <p class="card-text"><%=po.description%></p>
+                                  <p>from <%= po.source.name %> </p>
+                                  <a href="#" class="btn btn-primary">Read More</a>
+                                </div>
+                              </div>
+                        </div>
+                        <% }) %>
+                    <% }) %>
+                </div>
+            </div>
+        </center>
+        <a href="/news/"class="ad">GET MORE NEWS</a>
+            <p>powered by newsapi.org</p>
+    </div>
+    <%- include('partials/about') %> 
+</div>
+<script>
+    var Dates = new Date()
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+var week = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+    var m = monthNames[Dates.getUTCMonth()]
+    var w = week[Dates.getUTCDay()]
+    var d = Dates.getUTCDate();
+    var y = Dates.getFullYear()
+    var num = 9;
+    var cookie=document.cookie = ""+num.toString()
+    console.log(w);
+    $("#a").attr("href","/news/"+cookie)
+    $(".ad").attr("href","/news/"+num)
+
+    
+</script>
+<%- include('partials/footer'); -%>
