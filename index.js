@@ -186,7 +186,7 @@ app.post("/cases",(req,res)=>{
 })
 app.get("/news/:n",(req,res)=>{
     const n = Number(req.params.n);
-    request("https://newsapi.org/v2/top-headlines?q=corona%20virus&country=in&category=health&pageSize="+n+"&apiKey=69c0850d9aa44307b93aa8928a42fb11",function(error,response,body){
+    request("https://newsapi.org/v2/top-headlines?q=corona%20virus&country=in&category=health&pageSize="+n+"&apiKey=<Enter your own api key from news api>",function(error,response,body){
         var news = [JSON.parse(body).articles]
         // console.log(news[0]["articles"]);
         request("https://newsapi.org/v2/everything?q=covid-19&pageSize="+n+"&apiKey=69c0850d9aa44307b93aa8928a42fb11",function(er,rsponse,bo){
